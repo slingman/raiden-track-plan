@@ -245,6 +245,25 @@
   .watch-links a:hover{text-decoration:underline;}
   .watch-links a::before{content:'▶ ';}
 
+  .surface-tag{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.06em;
+    font-weight:500;
+    text-transform:uppercase;
+    padding:2px 7px;
+    border-radius:2px;
+    border:1px solid var(--rule);
+    color:var(--lane-dim);
+    margin-left:8px;
+    vertical-align:middle;
+  }
+  .surface-tag.track{
+    color:var(--block);
+    border-color:var(--block-dim);
+  }
+
   /* ---------- Load management ---------- */
   section.load{
     padding:64px 0;
@@ -350,6 +369,7 @@
         <li>Concrete has zero give compared to a track, so it loads joints harder — take the "pain signals" note below extra seriously, and do plyo work (pogo hops, bounds, box step-ups) on grass or a mat if one's available.</li>
         <li>Hand-timed splits run ~0.2-0.3s slower than blocks + laser timing (reaction lag on both ends). Currently averaging ~8.45s over the measured 50m — treat that as a consistent baseline to track week-over-week improvement, not a literal 50m time.</li>
         <li>No blocks needed — standing/2-point starts (already in the plan) are the right call for this setup.</li>
+        <li>Rule of thumb: sub-max technique work, light plyo, and strength/gym sessions are fine on the lot. Near-max or max-effort sprints, flying sprints, and heavier plyo volume (mostly Phase 2 onward) do better with track's surface give — sessions below are tagged <span class="surface-tag" style="margin-left:0;">Lot ok</span> / <span class="surface-tag track" style="margin-left:0;">Track preferred</span> accordingly.</li>
       </ul>
     </div>
   </header>
@@ -390,7 +410,7 @@
 
     <div class="session-cards">
       <div class="session-card">
-        <h3>Mon — Mechanics + Strength</h3>
+        <h3>Mon — Mechanics + Strength<span class="surface-tag">Lot ok</span></h3>
         <ul>
           <li>Dynamic warm-up: leg swings, walking lunges, high knees, butt kicks — 8 min</li>
           <li>Drills: A-skips, B-skips, straight-leg bounds — 2×20m each</li>
@@ -404,7 +424,7 @@
         </div>
       </div>
       <div class="session-card">
-        <h3>Thu — Speed + Accelerations</h3>
+        <h3>Thu — Speed + Accelerations<span class="surface-tag">Lot ok</span></h3>
         <ul>
           <li>Warm-up as above</li>
           <li>6-8 × 10-15m accelerations from standing/2-point start, full recovery between reps</li>
@@ -416,7 +436,7 @@
         </div>
       </div>
       <div class="session-card">
-        <h3>Sat — Strength + Light Plyo</h3>
+        <h3>Sat — Strength + Light Plyo<span class="surface-tag">Lot ok</span></h3>
         <ul>
           <li>Warm-up</li>
           <li>Plyo: pogo hops, ankle bounds, low box step-ups — 3×8-10</li>
@@ -451,7 +471,7 @@
 
     <div class="session-cards">
       <div class="session-card">
-        <h3>Mon — Starts + Drive Phase</h3>
+        <h3>Mon — Starts + Drive Phase<span class="surface-tag track">Track preferred</span></h3>
         <ul>
           <li>Warm-up + drills (A/B skips, bounds)</li>
           <li>Start position practice — first 3 steps, low and driving, not popping up</li>
@@ -463,7 +483,7 @@
         </div>
       </div>
       <div class="session-card">
-        <h3>Thu — Acceleration + Speed</h3>
+        <h3>Thu — Acceleration + Speed<span class="surface-tag track">Track preferred</span></h3>
         <ul>
           <li>Warm-up</li>
           <li>5-6 × 20-30m sprints, 80% → 95% effort, 2-3 min recovery</li>
@@ -474,7 +494,7 @@
         </div>
       </div>
       <div class="session-card">
-        <h3>Sat — Plyo + Top Speed Intro</h3>
+        <h3>Sat — Plyo + Top Speed Intro<span class="surface-tag track">Track preferred</span></h3>
         <ul>
           <li>Warm-up</li>
           <li>Plyo: bounding, low hurdle hops, single-leg hops — 3×8</li>
@@ -485,7 +505,7 @@
         </div>
       </div>
       <div class="session-card">
-        <h3>Wed — Strength</h3>
+        <h3>Wed — Strength<span class="surface-tag">Lot ok</span></h3>
         <ul>
           <li>Progress toward light added resistance</li>
           <li>Goblet squats, step-ups, resistance-band work</li>
@@ -519,7 +539,7 @@
 
     <div class="session-cards">
       <div class="session-card">
-        <h3>Mon — Starts + Race-Pace</h3>
+        <h3>Mon — Starts + Race-Pace<span class="surface-tag track">Track preferred</span></h3>
         <ul>
           <li>Warm-up + drills</li>
           <li>4-6 starts at 90-100% over 20-30m, full recovery</li>
@@ -530,7 +550,7 @@
         </div>
       </div>
       <div class="session-card">
-        <h3>Thu — Speed Sharpening</h3>
+        <h3>Thu — Speed Sharpening<span class="surface-tag track">Track preferred</span></h3>
         <ul>
           <li>Warm-up</li>
           <li>3-4 × 20m starts, crisp and fast, generous recovery</li>
