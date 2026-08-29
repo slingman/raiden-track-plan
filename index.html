@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>50m Sprint Plan — Fall 2026 to Spring Track</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --track: #14171c;
+    --track-2: #1b2027;
+    --lane: #f5f6f8;
+    --lane-dim: #9aa2ad;
+    --block: #f2c641;
+    --block-dim: #7a6529;
+    --rule: #2a313c;
+    --card: #1e242c;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--track);
+    color:var(--lane);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,.eyebrow,.stamp{font-family:'Oswald', sans-serif;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+
+  /* ---------- Lane texture background ---------- */
+  .lanes{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      repeating-linear-gradient(90deg, transparent 0 119px, rgba(245,246,248,0.035) 119px 121px, transparent 121px 240px);
+    opacity:0.6;
+  }
+
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px; position:relative; z-index:1;}
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    padding:90px 0 70px;
+    border-bottom:1px solid var(--rule);
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size:13px; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--block); font-weight:600;
+    border:1px solid var(--block-dim);
+    padding:6px 12px; border-radius:2px;
+    margin-bottom:28px;
+  }
+  h1{
+    font-size:clamp(36px, 6vw, 64px);
+    font-weight:700;
+    letter-spacing:-0.01em;
+    line-height:1.02;
+    text-transform:uppercase;
+    margin-bottom:22px;
+  }
+  h1 span{color:var(--block);}
+  .hero p{
+    max-width:56ch;
+    color:var(--lane-dim);
+    font-size:17px;
+  }
+  .meta-row{
+    display:flex; gap:32px; flex-wrap:wrap;
+    margin-top:36px;
+  }
+  .meta-item .k{font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--lane-dim); margin-bottom:4px;}
+  .meta-item .v{font-family:'JetBrains Mono', monospace; font-size:15px; color:var(--lane);}
+
+  /* ---------- Race track progress ---------- */
+  .race{
+    padding:56px 0 60px;
+    border-bottom:1px solid var(--rule);
+  }
+  .race h2.small-label{
+    font-size:13px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--lane-dim); font-weight:500; margin-bottom:28px;
+  }
+  .track-shell{
+    position:relative;
+    background:var(--track-2);
+    border:1px solid var(--rule);
+    border-radius:6px;
+    padding:34px 28px 20px;
+  }
+  .track-line{
+    position:relative;
+    height:2px;
+    background:linear-gradient(90deg, var(--block-dim), var(--block) 15%, var(--block) 78%, var(--rule) 78%, var(--rule));
+    margin:0 4px 14px;
+  }
+  .markers{
+    position:relative;
+    display:flex; justify-content:space-between;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--lane-dim);
+    padding:0 2px;
+  }
+  .phase-labels{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:16px;
+    margin-top:26px;
+  }
+  .phase-labels div{font-size:13px; color:var(--lane-dim);}
+  .phase-labels strong{display:block; color:var(--lane); font-family:'Oswald', sans-serif; font-size:15px; text-transform:uppercase; margin-bottom:4px; letter-spacing:0.02em;}
+
+  /* ---------- Phase sections ---------- */
+  section.phase{
+    padding:64px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .phase-head{
+    display:flex; align-items:baseline; gap:18px;
+    margin-bottom:8px;
+  }
+  .phase-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px; color:var(--block);
+    border:1px solid var(--block-dim);
+    padding:3px 9px; border-radius:2px;
+  }
+  .phase-head h2{
+    font-size:clamp(24px, 3.4vw, 32px);
+    text-transform:uppercase;
+    font-weight:600;
+  }
+  .phase-dates{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px; color:var(--lane-dim);
+    margin-bottom:10px;
+  }
+  .phase-focus{
+    color:var(--lane-dim);
+    max-width:60ch;
+    margin-bottom:34px;
+    font-size:15.5px;
+  }
+
+  .week-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-bottom:36px;
+    font-size:14.5px;
+  }
+  .week-table th{
+    text-align:left;
+    font-family:'Oswald', sans-serif;
+    font-weight:500;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--lane-dim);
+    padding:0 0 10px;
+    border-bottom:1px solid var(--rule);
+  }
+  .week-table td{
+    padding:11px 14px 11px 0;
+    border-bottom:1px solid var(--rule);
+    vertical-align:top;
+    color:var(--lane);
+  }
+  .week-table td:first-child{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--block);
+    white-space:nowrap;
+    width:64px;
+  }
+
+  .session-cards{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap:16px;
+  }
+  .session-card{
+    background:var(--card);
+    border:1px solid var(--rule);
+    border-radius:6px;
+    padding:20px 22px;
+  }
+  .session-card h3{
+    font-size:15px;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    color:var(--block);
+    margin-bottom:12px;
+    font-weight:600;
+  }
+  .session-card ul{
+    list-style:none;
+  }
+  .session-card li{
+    position:relative;
+    padding-left:16px;
+    margin-bottom:9px;
+    font-size:14px;
+    color:var(--lane-dim);
+  }
+  .session-card li::before{
+    content:'—';
+    position:absolute; left:0; color:var(--rule);
+  }
+  .taper-note{
+    margin-top:24px;
+    padding:16px 20px;
+    background:var(--card);
+    border-left:2px solid var(--block);
+    border-radius:0 4px 4px 0;
+    font-size:14.5px;
+    color:var(--lane-dim);
+  }
+  .taper-note strong{color:var(--lane);}
+
+  /* ---------- Load management ---------- */
+  section.load{
+    padding:64px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  section.load h2{
+    font-size:clamp(24px, 3.4vw, 32px);
+    text-transform:uppercase;
+    margin-bottom:34px;
+    font-weight:600;
+  }
+  .load-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap:1px;
+    background:var(--rule);
+    border:1px solid var(--rule);
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .load-item{
+    background:var(--track);
+    padding:24px 22px;
+  }
+  .load-item .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px; color:var(--block);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-bottom:10px;
+    display:block;
+  }
+  .load-item p{color:var(--lane-dim); font-size:14.5px;}
+
+  /* ---------- Quick reference finish ---------- */
+  section.finish{
+    padding:70px 0 100px;
+  }
+  section.finish h2{
+    font-size:clamp(24px, 3.4vw, 32px);
+    text-transform:uppercase;
+    margin-bottom:12px;
+    font-weight:600;
+  }
+  section.finish > p{color:var(--lane-dim); margin-bottom:30px; max-width:60ch;}
+  .steps{
+    counter-reset:step;
+  }
+  .step{
+    display:flex; gap:20px;
+    padding:20px 0;
+    border-top:1px solid var(--rule);
+  }
+  .step:last-child{border-bottom:1px solid var(--rule);}
+  .step-num{
+    counter-increment:step;
+    font-family:'JetBrains Mono', monospace;
+    font-size:20px;
+    color:var(--block);
+    min-width:34px;
+  }
+  .step-num::before{content: "0" counter(step);}
+  .step h3{font-size:16px; text-transform:none; margin-bottom:4px; font-weight:600;}
+  .step p{color:var(--lane-dim); font-size:14.5px;}
+
+  footer{
+    text-align:center;
+    padding:34px 0 50px;
+    color:var(--lane-dim);
+    font-size:13px;
+    font-family:'JetBrains Mono', monospace;
+  }
+
+  @media (max-width: 640px){
+    header.hero{padding:64px 0 46px;}
+    .phase-labels{grid-template-columns:1fr;}
+    .meta-row{gap:20px;}
+  }
+</style>
+</head>
+<body>
+<div class="lanes"></div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="eyebrow">Training Plan · 50m Dash</span>
+    <h1>Every phase<br>is a <span>step off the block.</span></h1>
+    <p>A season built like the race itself — general prep is the setup, specific prep is the drive phase, and competition season is the run to the line. Six months, three phases, one event.</p>
+    <div class="meta-row">
+      <div class="meta-item"><div class="k">Athlete</div><div class="v">Age 13</div></div>
+      <div class="meta-item"><div class="k">Event</div><div class="v">50m</div></div>
+      <div class="meta-item"><div class="k">Season</div><div class="v">Fall '26 – Spring '27</div></div>
+      <div class="meta-item"><div class="k">Concurrent</div><div class="v">Boxing → + Tennis</div></div>
+    </div>
+  </header>
+
+  <section class="race">
+    <h2 class="small-label">The season, mapped to the race</h2>
+    <div class="track-shell">
+      <div class="track-line"></div>
+      <div class="markers">
+        <span>0m — BLOCKS</span>
+        <span>20m — DRIVE</span>
+        <span>50m — LINE</span>
+      </div>
+      <div class="phase-labels">
+        <div><strong>Phase 1 · General Prep</strong>Now – late Nov. Mechanics, general strength, mobility.</div>
+        <div><strong>Phase 2 · Specific Prep</strong>Dec – Feb. Starts, acceleration, early top-speed work.</div>
+        <div><strong>Phase 3 · Competition</strong>Mar – May. Sharpen, race-model, taper for meets.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="phase" id="phase-1">
+    <div class="phase-head">
+      <span class="phase-num">01</span>
+      <h2>General Prep</h2>
+    </div>
+    <div class="phase-dates">NOW → LATE NOVEMBER · 3 track sessions/week + boxing as normal</div>
+    <p class="phase-focus">Build the foundation before anything intense: clean running mechanics, general strength, mobility, and light speed exposure. No max efforts yet.</p>
+
+    <table class="week-table">
+      <tr><th>Day</th><th>Session</th></tr>
+      <tr><td>Mon</td><td>Sprint mechanics + strength — 45 min</td></tr>
+      <tr><td>Wed</td><td>Boxing (as normal)</td></tr>
+      <tr><td>Thu</td><td>Speed drills + short accelerations — 40 min</td></tr>
+      <tr><td>Sat</td><td>Strength + light plyo — 40 min</td></tr>
+      <tr><td>Sun</td><td>Full rest</td></tr>
+    </table>
+
+    <div class="session-cards">
+      <div class="session-card">
+        <h3>Mon — Mechanics + Strength</h3>
+        <ul>
+          <li>Dynamic warm-up: leg swings, walking lunges, high knees, butt kicks — 8 min</li>
+          <li>Drills: A-skips, B-skips, straight-leg bounds — 2×20m each</li>
+          <li>Circuit ×2-3: squats, split-squat lunges, push-ups, glute bridges, plank, single-leg RDL — 10-12 reps</li>
+          <li>Cooldown: light jog + static stretch</li>
+        </ul>
+      </div>
+      <div class="session-card">
+        <h3>Thu — Speed + Accelerations</h3>
+        <ul>
+          <li>Warm-up as above</li>
+          <li>6-8 × 10-15m accelerations from standing/2-point start, full recovery between reps</li>
+          <li>Crisp mechanics over exhaustion — walk back each time</li>
+          <li>Light core work</li>
+        </ul>
+      </div>
+      <div class="session-card">
+        <h3>Sat — Strength + Light Plyo</h3>
+        <ul>
+          <li>Warm-up</li>
+          <li>Plyo: pogo hops, ankle bounds, low box step-ups — 3×8-10</li>
+          <li>Strength circuit, can add light resistance (backpack/bands)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="phase" id="phase-2">
+    <div class="phase-head">
+      <span class="phase-num">02</span>
+      <h2>Specific Prep</h2>
+    </div>
+    <div class="phase-dates">DECEMBER → FEBRUARY · 3-4 track sessions/week</div>
+    <p class="phase-focus">Now it gets race-specific: starts, drive phase, and building toward max velocity. This is where the plan targets the 50m directly.</p>
+
+    <table class="week-table">
+      <tr><th>Day</th><th>Session</th></tr>
+      <tr><td>Mon</td><td>Start mechanics + drive phase — 45 min</td></tr>
+      <tr><td>Tue</td><td>Boxing</td></tr>
+      <tr><td>Wed</td><td>Strength — 40 min</td></tr>
+      <tr><td>Thu</td><td>Acceleration + short speed — 40 min</td></tr>
+      <tr><td>Fri</td><td>Boxing or rest</td></tr>
+      <tr><td>Sat</td><td>Plyo + max velocity intro — 40 min</td></tr>
+      <tr><td>Sun</td><td>Full rest</td></tr>
+    </table>
+
+    <div class="session-cards">
+      <div class="session-card">
+        <h3>Mon — Starts + Drive Phase</h3>
+        <ul>
+          <li>Warm-up + drills (A/B skips, bounds)</li>
+          <li>Start position practice — first 3 steps, low and driving, not popping up</li>
+          <li>6-8 × 15-20m starts, full recovery</li>
+          <li>Core work</li>
+        </ul>
+      </div>
+      <div class="session-card">
+        <h3>Thu — Acceleration + Speed</h3>
+        <ul>
+          <li>Warm-up</li>
+          <li>5-6 × 20-30m sprints, 80% → 95% effort, 2-3 min recovery</li>
+          <li>1-2 reps at full effort only if mechanics stay clean</li>
+        </ul>
+      </div>
+      <div class="session-card">
+        <h3>Sat — Plyo + Top Speed Intro</h3>
+        <ul>
+          <li>Warm-up</li>
+          <li>Plyo: bounding, low hurdle hops, single-leg hops — 3×8</li>
+          <li>2-3 × 30m flys — rolling start into 20m near-top speed, ease off</li>
+        </ul>
+      </div>
+      <div class="session-card">
+        <h3>Wed — Strength</h3>
+        <ul>
+          <li>Progress toward light added resistance</li>
+          <li>Goblet squats, step-ups, resistance-band work</li>
+          <li>Continued core work</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="phase" id="phase-3">
+    <div class="phase-head">
+      <span class="phase-num">03</span>
+      <h2>Competition</h2>
+    </div>
+    <div class="phase-dates">MARCH → MAY · 2-3 focused sessions/week · tennis joins in</div>
+    <p class="phase-focus">Volume comes down intentionally — tennis and meets add load that can't be fully controlled, so intensity stays high while total track volume gets lighter.</p>
+
+    <table class="week-table">
+      <tr><th>Day</th><th>Session</th></tr>
+      <tr><td>Mon</td><td>Starts + race-pace reps — 30-35 min</td></tr>
+      <tr><td>Tue</td><td>Tennis / boxing</td></tr>
+      <tr><td>Wed</td><td>Easy technical/mobility day or rest — 20-25 min</td></tr>
+      <tr><td>Thu</td><td>Speed sharpening — 30 min</td></tr>
+      <tr><td>Fri</td><td>Rest or very light</td></tr>
+      <tr><td>Sat/Sun</td><td>Meet or tennis</td></tr>
+    </table>
+
+    <div class="session-cards">
+      <div class="session-card">
+        <h3>Mon — Starts + Race-Pace</h3>
+        <ul>
+          <li>Warm-up + drills</li>
+          <li>4-6 starts at 90-100% over 20-30m, full recovery</li>
+          <li>1-2 full 50m efforts at race intensity — once a week max</li>
+        </ul>
+      </div>
+      <div class="session-card">
+        <h3>Thu — Speed Sharpening</h3>
+        <ul>
+          <li>Warm-up</li>
+          <li>3-4 × 20m starts, crisp and fast, generous recovery</li>
+          <li>Light plyo, 2×6, low volume — sharp without added fatigue</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="taper-note"><strong>Taper week before a meet:</strong> cut volume by ~half, keep intensity, add an extra rest day 2 days out from race day.</div>
+  </section>
+
+  <section class="load">
+    <h2>Managing three activities at once</h2>
+    <div class="load-grid">
+      <div class="load-item">
+        <span class="tag">Total load</span>
+        <p>Aim for at most 4-5 genuinely hard days a week across boxing, tennis, and track combined — not per activity.</p>
+      </div>
+      <div class="load-item">
+        <span class="tag">Recovery</span>
+        <p>Sleep is the real recovery tool. 9+ hours matters more than anything done in a session.</p>
+      </div>
+      <div class="load-item">
+        <span class="tag">Pain signals</span>
+        <p>Sharp pain — especially knees, shins, heels, growth-plate areas — is a stop-and-check signal, not push-through.</p>
+      </div>
+      <div class="load-item">
+        <span class="tag">Priority</span>
+        <p>Let one thing lead each season. Track workouts get the earlier, fresher slots once season starts.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="finish">
+    <h2>What actually moves a 50m time</h2>
+    <p>Most of this plan is built around the first two — that's where a 13-year-old has the most room to improve fast.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num"></div><div><h3>Reaction + first 3 steps off the line</h3><p>Pure technique, practiced constantly through the whole season.</p></div></div>
+      <div class="step"><div class="step-num"></div><div><h3>Drive phase, staying low 0-20m</h3><p>Technique plus a bit of strength — this is Phase 2's centerpiece.</p></div></div>
+      <div class="step"><div class="step-num"></div><div><h3>Transition to upright sprinting ~20-30m</h3><p>Where drive phase hands off to full stride.</p></div></div>
+      <div class="step"><div class="step-num"></div><div><h3>Relaxed top-end speed 30-50m</h3><p>Kids often tense up here and slow down — relaxation is the skill, not more effort.</p></div></div>
+    </div>
+  </section>
+
+  <footer>50M TRAINING PLAN — FALL 2026 / SPRING 2027</footer>
+
+</div>
+</body>
+</html>
