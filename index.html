@@ -342,6 +342,54 @@
     .phase-labels{grid-template-columns:1fr;}
     .meta-row{gap:20px;}
   }
+
+  /* ---------- Shared video player ---------- */
+  .player-overlay{
+    position:fixed; left:0; right:0; bottom:0; z-index:50;
+    background:var(--card);
+    border-top:1px solid var(--rule);
+    box-shadow:0 -8px 24px rgba(0,0,0,0.4);
+    transform:translateY(100%);
+    transition:transform 0.25s ease;
+    max-height:82vh;
+  }
+  .player-overlay.open{transform:translateY(0);}
+  .player-bar{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px;
+    padding:10px 16px;
+    border-bottom:1px solid var(--rule);
+  }
+  .player-bar .player-title{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.03em;
+    color:var(--block);
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .player-close{
+    flex:none;
+    background:none;
+    border:1px solid var(--rule);
+    color:var(--lane-dim);
+    width:28px; height:28px;
+    border-radius:4px;
+    cursor:pointer;
+    font-size:16px; line-height:1;
+    font-family:'JetBrains Mono', monospace;
+  }
+  .player-close:hover{color:var(--lane); border-color:var(--lane-dim);}
+  .player-frame-wrap{
+    position:relative;
+    width:100%;
+    padding-top:56.25%;
+    background:#000;
+  }
+  .player-frame-wrap iframe{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    border:0;
+  }
 </style>
 </head>
 <body>
@@ -435,9 +483,9 @@
           <li>Cooldown: light jog + static stretch</li>
         </ul>
         <div class="watch-links">
-          <a href="https://www.youtube.com/watch?v=RfHN85hJpzc" target="_blank" rel="noopener">Warm-up drills</a>
-          <a href="https://www.youtube.com/watch?v=2LAg2FFAXbo" target="_blank" rel="noopener">A/B/C skip tutorial</a>
-          <a href="https://www.youtube.com/watch?v=qHkctpiIQJw" target="_blank" rel="noopener">Single-leg RDL</a>
+          <a href="https://www.youtube.com/watch?v=RfHN85hJpzc" onclick="return playVideo('RfHN85hJpzc', this.textContent, event);">Warm-up drills</a>
+          <a href="https://www.youtube.com/watch?v=2LAg2FFAXbo" onclick="return playVideo('2LAg2FFAXbo', this.textContent, event);">A/B/C skip tutorial</a>
+          <a href="https://www.youtube.com/watch?v=qHkctpiIQJw" onclick="return playVideo('qHkctpiIQJw', this.textContent, event);">Single-leg RDL</a>
         </div>
       </div>
       <div class="session-card">
@@ -449,7 +497,7 @@
           <li>Light core work</li>
         </ul>
         <div class="watch-links">
-          <a href="https://www.youtube.com/watch?v=13K8CIuUlXY" target="_blank" rel="noopener">Standing/2-point start</a>
+          <a href="https://www.youtube.com/watch?v=13K8CIuUlXY" onclick="return playVideo('13K8CIuUlXY', this.textContent, event);">Standing/2-point start</a>
         </div>
       </div>
       <div class="session-card">
@@ -460,8 +508,8 @@
           <li>Strength circuit, can add light resistance (backpack/bands)</li>
         </ul>
         <div class="watch-links">
-          <a href="https://www.youtube.com/watch?v=j0nl5dWuqN4" target="_blank" rel="noopener">Pogo hops form</a>
-          <a href="https://www.youtube.com/watch?v=q_U53bdjPvc" target="_blank" rel="noopener">Bounding drill</a>
+          <a href="https://www.youtube.com/watch?v=j0nl5dWuqN4" onclick="return playVideo('j0nl5dWuqN4', this.textContent, event);">Pogo hops form</a>
+          <a href="https://www.youtube.com/watch?v=q_U53bdjPvc" onclick="return playVideo('q_U53bdjPvc', this.textContent, event);">Bounding drill</a>
         </div>
       </div>
     </div>
@@ -496,7 +544,7 @@
           <li>Core work</li>
         </ul>
         <div class="watch-links">
-          <a href="https://www.youtube.com/watch?v=ZATnl00VnR0" target="_blank" rel="noopener">Drive phase technique</a>
+          <a href="https://www.youtube.com/watch?v=ZATnl00VnR0" onclick="return playVideo('ZATnl00VnR0', this.textContent, event);">Drive phase technique</a>
         </div>
       </div>
       <div class="session-card">
@@ -507,7 +555,7 @@
           <li>1-2 reps at full effort only if mechanics stay clean</li>
         </ul>
         <div class="watch-links">
-          <a href="https://www.youtube.com/watch?v=g9_E1tnlV1Y" target="_blank" rel="noopener">Acceleration 20-40m</a>
+          <a href="https://www.youtube.com/watch?v=g9_E1tnlV1Y" onclick="return playVideo('g9_E1tnlV1Y', this.textContent, event);">Acceleration 20-40m</a>
         </div>
       </div>
       <div class="session-card">
@@ -518,7 +566,7 @@
           <li>2-3 × 30m flys — rolling start into 20m near-top speed, ease off</li>
         </ul>
         <div class="watch-links">
-          <a href="https://www.youtube.com/watch?v=eG2A40J2Y8I" target="_blank" rel="noopener">Flying sprints (build-up run)</a>
+          <a href="https://www.youtube.com/watch?v=eG2A40J2Y8I" onclick="return playVideo('eG2A40J2Y8I', this.textContent, event);">Flying sprints (build-up run)</a>
         </div>
       </div>
       <div class="session-card">
@@ -529,8 +577,8 @@
           <li>Continued core work</li>
         </ul>
         <div class="watch-links">
-          <a href="https://www.youtube.com/watch?v=jZOvxOKYUFc" target="_blank" rel="noopener">Goblet squat form</a>
-          <a href="https://www.youtube.com/watch?v=-wOCnr-n-_4" target="_blank" rel="noopener">Band step-ups</a>
+          <a href="https://www.youtube.com/watch?v=jZOvxOKYUFc" onclick="return playVideo('jZOvxOKYUFc', this.textContent, event);">Goblet squat form</a>
+          <a href="https://www.youtube.com/watch?v=-wOCnr-n-_4" onclick="return playVideo('-wOCnr-n-_4', this.textContent, event);">Band step-ups</a>
         </div>
       </div>
     </div>
@@ -563,7 +611,7 @@
           <li>1-2 full 50m efforts at race intensity — once a week max</li>
         </ul>
         <div class="watch-links">
-          <a href="https://www.youtube.com/watch?v=NuDLCq8ApnM" target="_blank" rel="noopener">Sprint start basics</a>
+          <a href="https://www.youtube.com/watch?v=NuDLCq8ApnM" onclick="return playVideo('NuDLCq8ApnM', this.textContent, event);">Sprint start basics</a>
         </div>
       </div>
       <div class="session-card">
@@ -574,7 +622,7 @@
           <li>Light plyo, 2×6, low volume — sharp without added fatigue</li>
         </ul>
         <div class="watch-links">
-          <a href="https://www.youtube.com/watch?v=0EEyRg-WV9M" target="_blank" rel="noopener">Fix start & acceleration</a>
+          <a href="https://www.youtube.com/watch?v=0EEyRg-WV9M" onclick="return playVideo('0EEyRg-WV9M', this.textContent, event);">Fix start & acceleration</a>
         </div>
       </div>
     </div>
@@ -618,5 +666,29 @@
   <footer>50M TRAINING PLAN — FALL 2026 / SPRING 2027</footer>
 
 </div>
+
+<div class="player-overlay" id="player-overlay">
+  <div class="player-bar">
+    <span class="player-title" id="player-title"></span>
+    <button class="player-close" onclick="closePlayer()" aria-label="Close video">✕</button>
+  </div>
+  <div class="player-frame-wrap">
+    <iframe id="player-frame" src="" title="Video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+  function playVideo(id, title, evt){
+    if (evt) evt.preventDefault();
+    document.getElementById('player-frame').src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+    document.getElementById('player-title').textContent = title;
+    document.getElementById('player-overlay').classList.add('open');
+    return false;
+  }
+  function closePlayer(){
+    document.getElementById('player-overlay').classList.remove('open');
+    document.getElementById('player-frame').src = '';
+  }
+</script>
 </body>
 </html>
